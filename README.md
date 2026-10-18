@@ -10,7 +10,7 @@ Control real devices from the browser, hand them to your CI and Appium, and get 
 ![node](https://img.shields.io/badge/node-%E2%89%A520-339933)
 ![typescript](https://img.shields.io/badge/TypeScript-strict-3178c6)
 
-[Quick start](#-quick-start-no-hardware-needed) ï¿½ [Real devices](#-real-android-devices) ï¿½ [CI & Appium](#-ci-and-appium) ï¿½ [Configuration](#-configuration) ï¿½ [?????](README.fa.md)
+[Quick start](#-quick-start-no-hardware-needed) · [Real devices](#-real-android-devices) · [CI & Appium](#-ci-and-appium) · [Configuration](#-configuration) · [?????](README.fa.md)
 
 ![Fleet overview](docs/screenshots/devices.png)
 
@@ -26,7 +26,7 @@ Phones in a drawer don't scale: people ask "who has the Pixel?", test runs leave
 
 | | |
 |---|---|
-| ??? **Control from the browser** | Low-latency H.264 screen, touch, typing, Back/Home/Recents/Power, shell, logcat, file explorer, APK install, open URL, port forwarding |
+| ?? **Control from the browser** | Low-latency H.264 screen, touch, typing, Back/Home/Recents/Power, shell, logcat, file explorer, APK install, open URL, port forwarding |
 | ?? **Built for automation** | Device leases over REST, an **Appium gateway**, API tokens, a `ci run` command that always releases the device |
 | ?? **Clean between users** | On release the device is force-stopped, user apps are cleared (or uninstalled), media wiped ? and nobody can claim it until it's done |
 | ?? **Session recording** | Video + device log for every session, playable in the UI |
@@ -50,7 +50,7 @@ Phones in a drawer don't scale: people ask "who has the Pixel?", test runs leave
 ## ? Quick start (no hardware needed)
 
 ```bash
-git clone https://github.com/<your-user>/devicefarmz.git
+git clone https://github.com/Miladashrafii/devicefarmz.git
 cd devicefarmz
 npm install
 npm run build
@@ -132,7 +132,7 @@ battery>50             battery<20         available   busy   offline
 
 Whitespace means AND; any other word matches serial, model, manufacturer, owner and notes.
 
-## ??? Security notes
+## ?? Security notes
 
 - Set `DEVICEFARMZ_JWT_SECRET` to a long random value before exposing the hub to anyone.
 - The development login is only enabled by default when **no** OIDC/LDAP provider is configured. Don't expose a hub with it on.
@@ -209,14 +209,14 @@ Requires macOS or Linux with `libimobiledevice` (`idevice_id`, `ideviceinfo`, `i
 
 Supported: screen, tap/swipe, typing, Home, app install, open URL. Not supported on iOS: shell, file explorer, logcat, port forwarding.
 
-## ??? Architecture
+## ?? Architecture
 
 ```
 Browser ??HTTP/WS??? Hub (REST + WebSocket + static UI) ??? CI jobs / Appium clients
                       ?
-                      ?? Providers ?? Android (ADB + video server) ï¿½ iOS (WDA) ï¿½ Simulator
-                      ?? Lifecycle ?? claim ? use ? reset ? available
-                      ?? Automation leases ï¿½ Appium gateway ï¿½ Recorder ï¿½ Webhooks
+                      ?? Providers ? Android (ADB + video server) · iOS (WDA) · Simulator
+                      ?? Lifecycle ? claim ? use ? reset ? available
+                      ?? Automation leases · Appium gateway · Recorder · Webhooks
                       ?? SQLite
 ```
 
