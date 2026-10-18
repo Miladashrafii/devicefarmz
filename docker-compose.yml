@@ -1,0 +1,18 @@
+services:
+  hub:
+    build: .
+    ports:
+      - "7100:7100"
+    environment:
+      DEVICEFARMZ_PORT: "7100"
+      DEVICEFARMZ_PUBLIC_IP: localhost
+      DEVICEFARMZ_DATA: /data
+      DEVICEFARMZ_MOCK_AUTH: "true"
+    volumes:
+      - farmz-data:/data
+      # On Linux hosts, pass through USB devices / ADB as needed:
+      # - /dev/bus/usb:/dev/bus/usb
+    privileged: true
+
+volumes:
+  farmz-data:

@@ -1,0 +1,29 @@
+# Run Android instrumentation tests on a real device from the farm.
+# Needs the repo secret DEVICEFARMZ_TOKEN (create it under Settings in the DeviceFarmz UI)
+# and a runner that can reach the hub and has the `devicefarmz` CLI installed.
+name: device-tests
+on: [push]
+
+jobs:
+  instrumentation:
+    runs-on: self-hosted
+    env:
+      DEVICEFARMZ_URL: https://farm.example.com
+      DEVICEFARMZ_TOKEN: ${{ secrets.DEVICEFARMZ_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Reserve a device, expose it as DEVICE_UDID, and always release it (and wipe it) afterwards
+      - name: Instrumentation tests
+        run: >
+          devicefarmz ci run
+          --query "android>=13"
+          --wait 120
+          --label "${{ github.repository }}#${{ github.run_id }}"
+          -- ./gradlew connectedDebugAndroidTest
+
+      # Alternative: separate steps
+      # - run: devicefarmz ci acquire --query "samsung" > lease.json
+      # - run: ./run-tests.sh "$(jq -r '.serials[0]' lease.json)"
+      # - if: always()
+      #   run: devicefarmz ci release "$(jq -r '.sessions[]' lease.json)"

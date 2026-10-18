@@ -1,0 +1,29 @@
+{
+  "name": "devicefarmz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Self-hosted physical device farm for remote Android testing from the browser",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @devicefarmz/core && npm run build -w @devicefarmz/server && npm run build -w @devicefarmz/web",
+    "dev": "concurrently -n server,web -c cyan,magenta \"npm run dev -w @devicefarmz/server\" \"npm run dev -w @devicefarmz/web\"",
+    "dev:demo": "concurrently -n server,web -c cyan,magenta \"npm run dev:demo -w @devicefarmz/server\" \"npm run dev -w @devicefarmz/web\"",
+    "start": "npm run start -w @devicefarmz/server",
+    "doctor": "npm run doctor -w @devicefarmz/server",
+    "setup:tools": "node scripts/setup-tools.mjs",
+    "test": "npm test -w @devicefarmz/core && npm test -w @devicefarmz/server",
+    "migrate": "npm run migrate -w @devicefarmz/server",
+    "typecheck": "npm run typecheck -w @devicefarmz/core && npm run typecheck -w @devicefarmz/server && npm run typecheck -w @devicefarmz/web"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.8.2"
+  },
+  "license": "Apache-2.0"
+}
